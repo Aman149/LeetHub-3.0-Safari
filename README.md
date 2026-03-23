@@ -49,7 +49,7 @@ In the left sidebar, click the project name at the top. In the targets list, **s
 - `LeetHub-3.0 Extension (iOS)`
 
 <h1 align="center">
-    <img src="assets/extension/1.png" width="800">
+    <img src="assets/extension/1.png" width="300">
 </h1>
 
 ### Fix Signing for macOS Targets
@@ -66,7 +66,7 @@ For each of the two remaining macOS targets (the app and the extension), do the 
 > ⚠️ The extension's bundle ID **must be prefixed** with the app's bundle ID — otherwise you'll get a build error.
 
 <h1 align="center">
-    <img src="assets/extension/2.png" width="800">
+    <img src="assets/extension/2.png" width="700">
 </h1>
 
 ---
@@ -96,7 +96,7 @@ find ~/Library/Developer/Xcode/DerivedData -name "*.app" 2>/dev/null
 ```
 
 <h1 align="center">
-    <img src="assets/extension/3.png" width="800">
+    <img src="assets/extension/3.png" width="600">
 </h1>
 
 ---
@@ -119,7 +119,7 @@ find ~/Library/Developer/Xcode/DerivedData -name "*.app" 2>/dev/null
 And that's it — you're all set! 🎉 Every time you submit a solution on LeetCode, LeetHub will automatically push it to your GitHub repo.
 
 <h1 align="center">
-    <img src="assets/extension/4.png" width="800">
+    <img src="assets/extension/4.png" width="400">
 </h1>
 
 ---
