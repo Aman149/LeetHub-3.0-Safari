@@ -1,110 +1,131 @@
-<div align="center">
-    <img src="assets/logo.png" alt="LeetHub-3.0">
-</div>
+# LeetHub 3.0 — Safari Extension Setup Guide
 
-<p align="center">
-  <a href="https://github.com/raphaelheinz/LeetHub-3.0/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license"/>
-  </a>
-  <a href="https://chromewebstore.google.com/u/1/detail/leethub-v3/kdkgpjpenaeoodajljkflmlnkoihkmda">
-    <img src="https://img.shields.io/chrome-web-store/v/kdkgpjpenaeoodajljkflmlnkoihkmda.svg" alt="chrome-webstore"/>
-  </a>
-  <a href="https://chromewebstore.google.com/u/1/detail/leethub-v3/kdkgpjpenaeoodajljkflmlnkoihkmda">
-    <img src="https://img.shields.io/chrome-web-store/d/kdkgpjpenaeoodajljkflmlnkoihkmda.svg" alt="users">
-  </a>
-  <a href="https://github.com/raphaelheinz/LeetHub-3.0/graphs/contributors" alt="Contributors">
-    <img src="https://img.shields.io/github/contributors/raphaelheinz/LeetHub-3.0" />
-  </a>
-</p>
+A step-by-step guide to getting LeetHub working on Safari for macOS. No Apple Developer account required.
 
-## What is LeetHub-3.0?
+---
 
-A chrome extension that automatically pushes your code to GitHub when you pass all tests on a <a href="https://leetcode.com/">Leetcode</a> or <a href="https://leetcode.cn/">Leetcode CN</a> problem. It's forked from <a href="https://github.com/arunbhardwaj/LeetHub-2.0">LeetHub-2.0</a> which is not compatible with Leetcode anymore since the latest updates.
+## Prerequisites
 
+- A Mac running macOS 13 (Ventura) or later
+- **Xcode** installed from the Mac App Store (not just Command Line Tools)
+- Safari with Developer features enabled
 
-## Why LeetHub?
+---
 
-There's no easy way of accessing your leetcode problems in one place! Moreover, pushing code manually to GitHub from Leetcode is very time consuming. So, why not just automate it entirely without spending a SINGLE additional second on it?
+## Step 1: Download LeetHub
 
-## Screenshot
+Clone or download the latest version of LeetHub 3.0 from the official repo:
 
-<h1 align="center">
-    <img src="assets/extension/4.png" alt="leetcode view" width="800">
-</h1>
-
-## Supported Platforms
-
-LeetHub-3.0 supports both:
-- **LeetCode.com** (English)
-- **LeetCode.cn** (Chinese/力扣)
-
-## Supported UI
-
-LeetHub-3.0 works with two different Leetcode UIs. There are known issues when using the plugin with the "non-dynamic layout". Please use one of the following:
-
-1. **old layout** or
-2. new **"dynamic layout"**
-
-
-## Manual synchronization
-
-Your submission may not be successfully uploaded to GitHub if you update the text in the editor too fast. It is necessary to wait for 4 seconds (until the spinner stops) after submitting the solution before entering new characters, switching languages, or switching editors. During this period, your solution is being pushed to GitHub, and the website should maintain its layout without alteration. While this process is less than ideal, we have not found a better solution so far. Sorry for this inconvenience! If you find a fix, your PRs are welcome!
-
-In the meantime, we have added a manual synchronization button next to notes icon. Please use the manual sync button only after you have successfully submitted your solution to Leetcode. Additionally, you can push previous submissions to GitHub by selecting the submission first and then click on the manual synchronization button.
-
-
-## Installation
-
-<div align="center">
-    <a href="https://chromewebstore.google.com/u/1/detail/leethub-v3/kdkgpjpenaeoodajljkflmlnkoihkmda" rel="Download leetcode plugin">
-        <img src="https://embedsignage.com/wp-content/uploads/2016/04/embed-signage-chromeos-web-store-button.png" alt="Download leetcode plugin" width="300" />
-    </a>
-</div>
-
-1. **Chrome Web Store**
-
-    Install this plugin using Chrome Web Store. Please find the link above. This is the preferred way of installation. Updates are installed automatically.
-
-
-2. **(Optional) Manual installation**
-
-    You can also install the plugin manually. Please follow the steps below.
-
-    * Create your own OAuth app in GitHub (https://github.com/settings/applications/new) and store CLIENT_ID and CLIENT_SECRET confidentially
-        * Application name: [CUSTOM]
-        * Homepage URL: https://github.com/raphaelheinz/LeetHub-3.0
-        * Authorization callback URL: https://github.com/
-    * Download the project ZIP (<a href="https://github.com/raphaelheinz/LeetHub-3.0/releases">Releases</a>) or clone this repository
-    * Run ```npm run setup``` to install the developer dependencies
-    * Update CLIENT_ID and CLIENT_SECRET in ```src/js/authorize.js``` and ```src/js/oauth2.js``` with your ids
-    * Go to <a href="chrome://extensions">chrome://extensions</a>
-    * Enable <a href="https://www.mstoic.com/enable-developer-mode-in-chrome/">Developer mode</a> by toggling the switch on top right corner
-    * Click **"Load unpacked"**
-    * Select the entire LeetHub folder
-
-
-## Setup
-
-1. After installing the LeetHub, launch the plugin
-2. Click on **"Authorize with GitHub"** to set up your account with LeetHub
-3. Setup an existing/new repository with LeetHub (private by default) by clicking **"Get Started"**
-4. Begin Leetcoding! To view your progress, simply click on the extension!
-
-
-## Supported npm commands
-
-```bash
-npm run               # Show available commands
-npm run setup         # Install dependencies
-npm run format        # Auto-format JavaScript, HTML/CSS
-npm run format-test   # Test if code is formatted properly
-npm run lint          # Lint JavaScript
-npm run lint-test     # Test if code is linted properly
+```
+https://github.com/raphaelheinz/LeetHub-3.0
 ```
 
-## Contribution
+You can either `git clone` it or download the ZIP and extract it. Note the folder path — you'll need it in the next step.
 
-Please help to further improve this awesome plugin! We would appreciate your support. Your pull requests are welcome!
+---
 
-Don't forget to star this repository for further development of new features. If you want a particular feature, simply [request](https://github.com/raphaelheinz/LeetHub-3.0/labels/feature) for it!
+## Step 2: Convert the Chrome Extension to a Safari Extension
 
+Open **Terminal** and run the following command, replacing the path with wherever you saved LeetHub:
+
+```bash
+xcrun safari-web-extension-converter /path/to/LeetHub-3.0
+```
+
+**What this command does:**
+This uses Apple's built-in conversion tool to take a standard Chrome/Chromium extension (which uses the WebExtensions API) and wrap it inside a native macOS app that Safari can load. It auto-translates `chrome.*` API calls to their Safari-compatible `browser.*` equivalents and generates a ready-to-build Xcode project for you.
+
+Once it runs, it will open the generated Xcode project automatically.
+
+---
+
+## Step 3: Configure the Xcode Project
+
+When Xcode opens, you'll see a project with **four targets** by default — two for iOS and two for macOS. Since we only want the macOS version, clean things up:
+
+### Remove iOS Targets
+In the left sidebar, click the project name at the top. In the targets list, **select and delete** these two:
+- `LeetHub-3.0 (iOS)`
+- `LeetHub-3.0 Extension (iOS)`
+
+<h1 align="center">
+    <img src="assets/extension/1.png" width="800">
+</h1>
+
+### Fix Signing for macOS Targets
+For each of the two remaining macOS targets (the app and the extension), do the following:
+
+1. Click the target name
+2. Go to the **Signing & Capabilities** tab
+3. Set **Team** to your personal Apple ID (add it via `Xcode → Settings → Accounts` if it's not listed)
+4. Make sure **Automatically manage signing** is checked
+5. Set the **Bundle Identifier** following this pattern:
+   - macOS App: `com.yourname.leethub`
+   - macOS Extension: `com.yourname.leethub.extension`
+
+> ⚠️ The extension's bundle ID **must be prefixed** with the app's bundle ID — otherwise you'll get a build error.
+
+<h1 align="center">
+    <img src="assets/extension/2.png" width="800">
+</h1>
+
+---
+
+## Step 4: Build the Project
+
+Press **`Cmd + R`** or go to **Product → Run** to build and run the project.
+
+A successful build will show **"Build Succeeded"** at the top of Xcode.
+
+> You may see a log message about `binary.metallib` or Metal shaders — this is a harmless macOS system warning, not a build error. Ignore it.
+
+---
+
+## Step 5: Get the App File
+
+After a successful build, retrieve the compiled app:
+
+1. In the Xcode top menu bar, go to **Product → Show Build Folder in Finder**
+2. Navigate to `Products/Debug/`
+3. You'll find a `.app` file — **drag it to your `/Applications` folder**
+
+Alternatively, find it via Terminal:
+
+```bash
+find ~/Library/Developer/Xcode/DerivedData -name "*.app" 2>/dev/null
+```
+
+<h1 align="center">
+    <img src="assets/extension/3.png" width="800">
+</h1>
+
+---
+
+## Step 6: Enable the Extension in Safari
+
+1. Launch the `.app` from your `/Applications` folder — it'll show a simple window prompting you to enable it in Safari
+2. Open **Safari → Settings** (`Cmd + ,`) → **Extensions** tab
+3. Toggle **LeetHub** on
+4. Click **"Always Allow on Every Website"** or manually allow it on `leetcode.com` and `github.com`
+
+---
+
+## Step 7: Configure Your GitHub Repo
+
+1. Click the LeetHub icon in the Safari toolbar
+2. Authenticate with your GitHub account
+3. Select or create the repository where you want your LeetCode solutions to sync
+
+And that's it — you're all set! 🎉 Every time you submit a solution on LeetCode, LeetHub will automatically push it to your GitHub repo.
+
+<h1 align="center">
+    <img src="assets/extension/4.png" width="800">
+</h1>
+
+---
+
+## Notes
+
+- You only need to launch the `.app` **once** — Safari remembers the extension after that, even across reboots
+- If the extension ever disappears from Safari, just open the `.app` again to re-register it
+- No paid Apple Developer account is needed for local use on your own Mac
